@@ -29,13 +29,10 @@
 }
 
 html { scroll-behavior: smooth; }
-body { background: var(--bg); color: var(--linen); font-family: "Outfit", sans-serif; font-weight: 400; overflow-x: hidden; cursor: none; line-height: 1.6; }
+body { background: var(--bg); color: var(--linen); font-family: "Outfit", sans-serif; font-weight: 400; overflow-x: hidden; line-height: 1.6; }
 
 /* CURSOR */
-.c-dot  { position: fixed; width: 8px; height: 8px; background: var(--accent); border-radius: 50%; pointer-events: none; z-index: 9999; transform: translate(-50%,-50%); transition: width .15s, height .15s; }
-.c-ring { position: fixed; width: 36px; height: 36px; border: 1px solid rgba(200,168,130,.5); border-radius: 50%; pointer-events: none; z-index: 9998; transform: translate(-50%,-50%); }
-.c-dot.big { width: 0; height: 0; }
-.c-ring.big { width: 52px; height: 52px; border-color: var(--accent); }
+.c-dot, .c-ring { display: none; }
 
 /* NAV */
 nav {
@@ -54,7 +51,7 @@ nav {
 /* HERO */
 .hero {
   min-height: 100vh;
-  display: flex; flex-direction: column; justify-content: center;
+  display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;
   padding: 160px 60px 100px;
   background: linear-gradient(145deg, #1A0E07 0%, #2a1508 60%, #1A0E07 100%);
   position: relative; overflow: hidden;
@@ -76,14 +73,14 @@ nav {
 .hero-h1 {
   font-size: clamp(52px, 7.5vw, 108px);
   font-weight: 900; line-height: 1.0; letter-spacing: -.03em;
-  color: var(--linen); margin-bottom: 32px; max-width: 820px;
+  color: var(--linen); margin-bottom: 32px; max-width: 820px; text-align: center;
 }
 .hero-h1 span { color: var(--accent); }
 .hero-p {
   font-size: 19px; font-weight: 300; line-height: 1.75;
-  color: var(--text); max-width: 500px; margin-bottom: 52px;
+  color: var(--text); max-width: 500px; margin-bottom: 52px; text-align: center;
 }
-.hero-btns { display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
+.hero-btns { display: flex; align-items: center; justify-content: center; gap: 20px; flex-wrap: wrap; }
 .btn {
   font-size: 13px; font-weight: 700; letter-spacing: .07em;
   text-decoration: none; display: inline-block;

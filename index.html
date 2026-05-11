@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -8,483 +7,297 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400&display=swap" rel="stylesheet">
 <style>
-:root {
-  --bg:    #0e0e0e;
-  --s1:    #161616;
-  --s2:    #1d1d1d;
-  --s3:    #252525;
-  --b1:    #222222;
-  --b2:    #2e2e2e;
-  --b3:    #3d3d3d;
-  --text:  #f4f4f4;
-  --dim:   #888888;
-  --muted: #505050;
-  --white: #ffffff;
+:root{
+  --bg:#0e0e0e;--s1:#161616;--s2:#1d1d1d;--s3:#252525;
+  --b1:#222;--b2:#2e2e2e;--b3:#3d3d3d;
+  --text:#f4f4f4;--dim:#888;--muted:#505050;--white:#fff;
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html,body{height:100%;overflow:hidden;}
-@media(max-width:768px){html{height:auto!important;overflow:auto!important;}body{height:auto!important;overflow:visible!important;}}
-body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;font-size:14px;-webkit-font-smoothing:antialiased;display:flex;flex-direction:column}
+
+/* ── BASE: mobile first ── */
+html{scroll-behavior:smooth;}
+body{
+  background:var(--bg);color:var(--text);
+  font-family:'DM Sans',sans-serif;font-size:14px;
+  -webkit-font-smoothing:antialiased;
+  min-height:100vh;
+  /* NO overflow:hidden — let it scroll naturally */
+}
 
 /* ── NAV ── */
 .nav{
-height:56px;flex-shrink:0;
-display:flex;align-items:center;
-padding:0 28px;gap:32px;
-border-bottom:1px solid var(–b1);
-background:var(–s1);
+  position:sticky;top:0;z-index:200;
+  height:52px;
+  display:flex;align-items:center;
+  padding:0 16px;gap:12px;
+  border-bottom:1px solid var(--b1);
+  background:var(--s1);
 }
 .nav-logo{
-display:flex;align-items:center;gap:10px;
-text-decoration:none;flex-shrink:0;
+  display:flex;align-items:center;gap:10px;
+  text-decoration:none;flex-shrink:0;
 }
 .logo-diamond{
-width:22px;height:22px;
-border:1.5px solid var(–b3);
-transform:rotate(45deg);
-position:relative;flex-shrink:0;
+  width:20px;height:20px;flex-shrink:0;
+  border:1.5px solid var(--b3);
+  transform:rotate(45deg);
+  position:relative;
 }
 .logo-diamond::after{
-content:’’;position:absolute;inset:4px;
-background:var(–white);
+  content:'';position:absolute;inset:4px;
+  background:var(--white);
 }
 .nav-name{
-font-family:‘Syne’,sans-serif;
-font-weight:800;font-size:14px;
-letter-spacing:0.1em;text-transform:uppercase;
-color:var(–white);
+  font-family:'Syne',sans-serif;
+  font-weight:800;font-size:14px;
+  letter-spacing:0.1em;text-transform:uppercase;
+  color:var(--white);
 }
-.nav-links{
-display:flex;align-items:center;gap:4px;
-}
-.nav-link{
-padding:6px 14px;border-radius:6px;
-font-size:13px;color:var(–dim);
-text-decoration:none;transition:all .15s;
-font-weight:400;display:flex;align-items:center;gap:6px;
-}
-.nav-link:hover{color:var(–text);background:var(–s2);}
-.nav-link.active{color:var(–white);}
-.nav-link.locked{opacity:.55;cursor:not-allowed;pointer-events:none;}
-.nav-link svg{width:11px;height:11px;stroke:currentColor;fill:none;stroke-width:2.5;}
 .nav-sep{flex:1;}
+.nav-links{display:none;} /* hidden on mobile */
 .btn{
-padding:7px 18px;border-radius:6px;
-font-size:12px;font-weight:500;
-cursor:pointer;border:none;
-font-family:‘DM Sans’,sans-serif;
-letter-spacing:0.02em;transition:all .15s;
+  padding:7px 16px;border-radius:6px;
+  font-size:12px;font-weight:600;
+  cursor:pointer;border:none;
+  font-family:'DM Sans',sans-serif;
+  letter-spacing:0.02em;transition:all .15s;
+  white-space:nowrap;
 }
-.btn-white{background:var(–white);color:var(–bg);font-weight:600;}
+.btn-white{background:var(--white);color:var(--bg);}
 .btn-white:hover{background:#e8e8e8;}
 
-/* ── BODY LAYOUT ── */
-.body-wrap{
-flex:1;display:flex;overflow:hidden;
-}
+/* ── PAGE WRAP ── */
+.page{display:flex;min-height:calc(100vh - 52px);}
 
-/* ── SIDEBAR ── */
-.sidebar{
-width:200px;flex-shrink:0;
-border-right:1px solid var(–b1);
-background:var(–s1);
-display:flex;flex-direction:column;
-padding:20px 0;
-}
-.sb-label{
-font-family:‘DM Mono’,monospace;
-font-size:9px;letter-spacing:0.2em;
-text-transform:uppercase;color:#686868;
-padding:0 20px 8px;margin-top:8px;
-}
-.sb-item{
-display:flex;align-items:center;gap:10px;
-padding:9px 20px;cursor:pointer;
-font-size:13px;color:var(–dim);
-text-decoration:none;
-transition:all .12s;position:relative;
-}
-.sb-item:hover:not(.locked){color:var(–text);background:var(–s2);}
-.sb-item.active{color:var(–white);}
-.sb-item.active::before{
-content:’’;position:absolute;
-left:0;top:50%;transform:translateY(-50%);
-width:2px;height:18px;
-background:var(–white);
-border-radius:0 2px 2px 0;
-}
-.sb-item.locked{opacity:.55;cursor:not-allowed;}
-.sb-item svg{
-width:14px;height:14px;stroke:currentColor;
-fill:none;stroke-width:1.8;flex-shrink:0;opacity:.6;
-}
-.sb-item.active svg{opacity:1;}
-.lock-icon{
-width:12px;height:12px;stroke:currentColor;
-fill:none;stroke-width:2;flex-shrink:0;
-margin-left:auto;opacity:.5;
-}
+/* ── SIDEBAR ── hidden on mobile ── */
+.sidebar{display:none;}
 
 /* ── MAIN ── */
-.main{
-flex:1;display:flex;flex-direction:column;
-overflow:hidden;
-}
+.main{flex:1;min-width:0;display:flex;flex-direction:column;}
 
 /* ── FILTER BAR ── */
 .filter-bar{
-height:48px;flex-shrink:0;
-display:flex;align-items:center;
-gap:6px;padding:0 28px;
-border-bottom:1px solid var(–b1);
-background:var(–s1);
+  display:flex;align-items:center;gap:6px;
+  padding:10px 16px;
+  border-bottom:1px solid var(--b1);
+  background:var(--s1);
+  overflow-x:auto;
+  scrollbar-width:none;
+  flex-shrink:0;
+  position:sticky;top:52px;z-index:100;
 }
+.filter-bar::-webkit-scrollbar{display:none;}
 .filter-pill{
-padding:5px 14px;border-radius:5px;
-font-size:12px;color:var(–dim);
-border:1px solid transparent;
-cursor:pointer;transition:all .12s;
-font-family:‘DM Sans’,sans-serif;background:transparent;
+  padding:5px 14px;border-radius:5px;
+  font-size:12px;color:var(--dim);
+  border:1px solid transparent;
+  cursor:pointer;transition:all .12s;
+  font-family:'DM Sans',sans-serif;
+  background:transparent;white-space:nowrap;flex-shrink:0;
 }
-.filter-pill:hover{color:var(–text);border-color:var(–b1);}
-.filter-pill.on{
-background:var(–white);color:var(–bg);
-font-weight:500;
-}
-.filter-sep{flex:1;}
-.filter-count{
-font-family:‘DM Mono’,monospace;
-font-size:10px;color:var(–muted);
-letter-spacing:0.1em;
-}
+.filter-pill:hover{color:var(--text);border-color:var(--b1);}
+.filter-pill.on{background:var(--white);color:var(--bg);font-weight:500;}
 
 /* ── CONTENT ── */
-.content{
-flex:1;overflow-y:auto;
-padding:28px 28px 60px;
-}
-.content::-webkit-scrollbar{width:3px;}
-.content::-webkit-scrollbar-thumb{background:var(–b2);border-radius:2px;}
+.content{padding:20px 16px 60px;}
 
-/* ── SECTION TITLE ── */
+/* ── SECTION HEAD ── */
 .sect{
-display:flex;align-items:center;
-justify-content:space-between;
-margin-bottom:14px;
+  display:flex;align-items:center;
+  justify-content:space-between;
+  margin-bottom:14px;
 }
 .sect-title{
-font-family:‘DM Mono’,monospace;
-font-size:10px;letter-spacing:0.18em;
-text-transform:uppercase;color:var(–dim);
+  font-family:'DM Mono',monospace;
+  font-size:10px;letter-spacing:0.18em;
+  text-transform:uppercase;color:var(--dim);
 }
 .sect-arrows{display:flex;gap:4px;}
 .sarr{
-width:24px;height:24px;border-radius:4px;
-background:var(–s2);border:1px solid var(–b1);
-display:flex;align-items:center;justify-content:center;
-cursor:pointer;color:var(–muted);transition:all .12s;
+  width:26px;height:26px;border-radius:4px;
+  background:var(--s2);border:1px solid var(--b1);
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;color:var(--muted);transition:all .12s;
 }
-.sarr:hover{color:var(–text);border-color:var(–b2);}
+.sarr:hover{color:var(--text);border-color:var(--b2);}
 .sarr svg{width:10px;height:10px;stroke:currentColor;fill:none;stroke-width:2.5;}
 
 /* ── CARD ROW ── */
 .card-row{
-display:flex;gap:10px;
-overflow-x:auto;padding-bottom:4px;
-scroll-behavior:smooth;scrollbar-width:none;
-margin-bottom:40px;
+  display:flex;gap:10px;
+  overflow-x:auto;padding-bottom:4px;
+  scroll-behavior:smooth;scrollbar-width:none;
+  margin-bottom:32px;
+  -webkit-overflow-scrolling:touch;
 }
 .card-row::-webkit-scrollbar{display:none;}
 
 /* ── CAMPAIGN CARD ── */
 .ccard{
-flex-shrink:0;width:190px;height:270px;
-border-radius:10px;overflow:hidden;
-position:relative;cursor:not-allowed;
-border:1px solid var(–b1);
-background:var(–s2);
-transition:border-color .2s,transform .2s,box-shadow .2s;
+  flex-shrink:0;width:155px;height:230px;
+  border-radius:10px;overflow:hidden;
+  position:relative;cursor:not-allowed;
+  border:1px solid var(--b1);background:var(--s2);
 }
 .ccard-bg{
-position:absolute;inset:0;
-display:flex;align-items:center;
-justify-content:center;
-opacity:.55;
+  position:absolute;inset:0;
+  display:flex;align-items:center;justify-content:center;
+  opacity:.55;
 }
-.ccard-bg svg{width:110px;height:110px;}
+.ccard-bg svg{width:80px;height:80px;}
 .ccard-overlay{
-position:absolute;inset:0;
-background:linear-gradient(
-to bottom,
-rgba(8,8,8,.6) 0%,
-rgba(8,8,8,.1) 35%,
-rgba(8,8,8,.1) 50%,
-rgba(8,8,8,.97) 100%
-);
+  position:absolute;inset:0;
+  background:linear-gradient(to bottom,rgba(8,8,8,.6) 0%,rgba(8,8,8,.1) 35%,rgba(8,8,8,.1) 50%,rgba(8,8,8,.97) 100%);
 }
-/* frosted lock overlay */
 .ccard-lock{
-position:absolute;inset:0;z-index:4;
-display:flex;align-items:center;justify-content:center;
-background:rgba(8,8,8,.18);
-backdrop-filter:blur(1px);
+  position:absolute;inset:0;z-index:4;
+  display:flex;align-items:center;justify-content:center;
+  background:rgba(8,8,8,.18);backdrop-filter:blur(1px);
 }
-.lock-badge{
-display:flex;flex-direction:column;
-align-items:center;gap:7px;
-}
-.lock-badge svg{
-width:20px;height:20px;
-stroke:rgba(255,255,255,.35);
-fill:none;stroke-width:1.8;
-}
+.lock-badge{display:flex;flex-direction:column;align-items:center;gap:7px;}
+.lock-badge svg{width:18px;height:18px;stroke:rgba(255,255,255,.35);fill:none;stroke-width:1.8;}
 .lock-badge-txt{
-font-family:‘DM Mono’,monospace;
-font-size:8px;letter-spacing:0.2em;
-text-transform:uppercase;
-color:rgba(255,255,255,.25);
+  font-family:'DM Mono',monospace;font-size:7px;
+  letter-spacing:0.2em;text-transform:uppercase;color:rgba(255,255,255,.25);
 }
 .ccard-top{
-position:absolute;top:10px;left:10px;right:10px;
-display:flex;justify-content:space-between;
-align-items:flex-start;z-index:2;
+  position:absolute;top:10px;left:10px;right:10px;
+  display:flex;justify-content:space-between;align-items:flex-start;z-index:2;
 }
 .ccard-title{
-font-family:‘Syne’,sans-serif;
-font-weight:800;font-size:13px;
-color:rgba(255,255,255,.4);line-height:1.2;
-text-shadow:0 2px 12px rgba(0,0,0,.9);
-max-width:65%;
+  font-family:'Syne',sans-serif;font-weight:800;font-size:11px;
+  color:rgba(255,255,255,.4);line-height:1.2;
+  text-shadow:0 2px 12px rgba(0,0,0,.9);max-width:65%;
 }
 .ccard-plats{display:flex;gap:3px;}
 .cplat{
-width:22px;height:22px;border-radius:4px;
-background:rgba(8,8,8,.6);
-border:1px solid rgba(255,255,255,.05);
-display:flex;align-items:center;justify-content:center;
-opacity:.4;
+  width:20px;height:20px;border-radius:4px;
+  background:rgba(8,8,8,.6);border:1px solid rgba(255,255,255,.05);
+  display:flex;align-items:center;justify-content:center;opacity:.4;
 }
-.cplat svg{width:10px;height:10px;}
-.ccard-bottom{
-position:absolute;bottom:0;left:0;right:0;
-padding:12px;z-index:2;
-}
-.ccard-stats{
-display:flex;gap:5px;margin-bottom:8px;
-}
+.cplat svg{width:9px;height:9px;}
+.ccard-bottom{position:absolute;bottom:0;left:0;right:0;padding:10px;z-index:2;}
+.ccard-stats{display:flex;gap:5px;margin-bottom:6px;}
 .cstat{
-flex:1;
-background:rgba(8,8,8,.6);
-border:1px solid rgba(255,255,255,.04);
-border-radius:4px;padding:5px 8px;
-display:flex;align-items:center;gap:4px;
-opacity:.4;
+  flex:1;background:rgba(8,8,8,.6);border:1px solid rgba(255,255,255,.04);
+  border-radius:4px;padding:4px 6px;display:flex;align-items:center;gap:3px;opacity:.4;
 }
-.cstat svg{
-width:9px;height:9px;stroke:var(–dim);
-fill:none;stroke-width:2;flex-shrink:0;
-}
-.cstat-val{
-font-family:‘DM Mono’,monospace;
-font-size:10px;color:rgba(255,255,255,.6);
-white-space:nowrap;
-}
-.cprog{
-height:2px;background:rgba(255,255,255,.05);
-border-radius:1px;overflow:hidden;
-opacity:.4;
-}
-.cprog-fill{
-height:100%;background:var(–white);
-border-radius:1px;
-}
+.cstat svg{width:8px;height:8px;stroke:var(--dim);fill:none;stroke-width:2;flex-shrink:0;}
+.cstat-val{font-family:'DM Mono',monospace;font-size:9px;color:rgba(255,255,255,.8);white-space:nowrap;}
+.cprog{height:2px;background:rgba(255,255,255,.07);border-radius:1px;overflow:hidden;opacity:.4;}
+.cprog-fill{height:100%;background:var(--white);border-radius:1px;}
 
-/* ── CARD COUNT BADGE ── */
-.ccard-count{
-position:absolute;top:10px;right:10px;
-z-index:3;
-background:rgba(8,8,8,.85);
-backdrop-filter:blur(8px);
-border:1px solid rgba(255,255,255,.08);
-border-radius:4px;
-padding:3px 7px;
-font-family:‘DM Mono’,monospace;
-font-size:9px;
-color:rgba(255,255,255,.3);
-letter-spacing:0.08em;
-}
-
-/* ── NOTIFY SECTION ── */
+/* ── NOTIFY ── */
 .notify-wrap{
-border:1px solid var(–b1);
-border-radius:12px;
-padding:40px;
-display:flex;
-flex-direction:column;
-align-items:center;
-text-align:center;
-gap:20px;
-background:var(–s1);
-margin-top:8px;
+  border:1px solid var(--b1);border-radius:12px;
+  padding:36px 20px;
+  display:flex;flex-direction:column;align-items:center;
+  text-align:center;gap:18px;background:var(--s1);
 }
-
 .notify-diamond{
-width:36px;height:36px;
-border:1.5px solid var(–b3);
-transform:rotate(45deg);
-position:relative;flex-shrink:0;
+  width:30px;height:30px;flex-shrink:0;
+  border:1.5px solid var(--b3);
+  transform:rotate(45deg);position:relative;
 }
-.notify-diamond::after{
-content:’’;position:absolute;inset:6px;
-background:var(–white);
-}
-
+.notify-diamond::after{content:'';position:absolute;inset:5px;background:var(--white);}
 .notify-title{
-font-family:‘Syne’,sans-serif;
-font-weight:800;font-size:20px;
-color:var(–white);
-letter-spacing:-0.02em;
-line-height:1.2;
+  font-family:'Syne',sans-serif;font-weight:800;
+  font-size:18px;color:var(--white);letter-spacing:-0.02em;line-height:1.2;
 }
-
-.notify-sub{
-font-size:13px;color:var(–dim);
-font-weight:300;line-height:1.7;
-max-width:360px;
-}
-
-.notify-form{
-display:flex;gap:8px;
-width:100%;max-width:400px;
-}
-
+.notify-sub{font-size:13px;color:var(--dim);font-weight:300;line-height:1.7;max-width:320px;}
 .notify-btn{
-padding:13px 36px;
-background:var(–white);
-color:var(–bg);
-border:none;border-radius:7px;
-font-family:‘DM Sans’,sans-serif;
-font-size:13px;font-weight:600;
-cursor:pointer;transition:background .15s;
+  width:100%;max-width:320px;padding:13px;
+  background:var(--white);color:var(--bg);
+  border:none;border-radius:7px;
+  font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;
+  cursor:pointer;transition:background .15s;
 }
 .notify-btn:hover{background:#e8e8e8;}
-
 .notify-note{
-font-family:‘DM Mono’,monospace;
-font-size:9px;letter-spacing:0.12em;
-text-transform:uppercase;
-color:#686868;
+  font-family:'DM Mono',monospace;font-size:9px;
+  letter-spacing:0.12em;text-transform:uppercase;color:#686868;
 }
 
-/* ── MOBILE ── */
-@media (max-width:768px){
-html,body{height:auto!important;overflow:auto!important;}
-body{display:flex!important;flex-direction:column!important;}
-
-/* nav — keep exactly as desktop but slimmer padding */
-.nav{
-position:sticky;top:0;z-index:100;
-height:52px;padding:0 16px;gap:12px;
-flex-shrink:0;
+/* ── SIDEBAR ITEMS (shared styles for desktop) ── */
+.sb-label{
+  font-family:'DM Mono',monospace;font-size:9px;
+  letter-spacing:0.2em;text-transform:uppercase;color:#686868;
+  padding:0 20px 8px;margin-top:8px;
 }
-.nav-links{display:none!important;}
-.nav-sep{display:none!important;}
-
-/* force logo to show */
-.nav-logo{display:flex!important;align-items:center!important;gap:10px!important;}
-.logo-diamond{
-display:block!important;
-width:20px!important;height:20px!important;
-border:1.5px solid var(–b3)!important;
-transform:rotate(45deg)!important;
-position:relative!important;flex-shrink:0!important;
-background:transparent!important;
+.sb-item{
+  display:flex;align-items:center;gap:10px;
+  padding:9px 20px;cursor:pointer;
+  font-size:13px;color:var(--dim);
+  text-decoration:none;transition:all .12s;position:relative;
 }
-.logo-diamond::after{
-content:’’!important;position:absolute!important;
-inset:4px!important;background:var(–white)!important;
+.sb-item:hover:not(.locked){color:var(--text);background:var(--s2);}
+.sb-item.active{color:var(--white);}
+.sb-item.active::before{
+  content:'';position:absolute;left:0;top:50%;transform:translateY(-50%);
+  width:2px;height:18px;background:var(--white);border-radius:0 2px 2px 0;
 }
-.nav-name{
-display:block!important;
-font-family:‘Syne’,sans-serif!important;
-font-weight:800!important;font-size:14px!important;
-letter-spacing:0.1em!important;text-transform:uppercase!important;
-color:var(–white)!important;
+.sb-item.locked{opacity:.55;cursor:not-allowed;}
+.sb-item svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:1.8;flex-shrink:0;opacity:.6;}
+.sb-item.active svg{opacity:1;}
+.lock-icon{width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2;flex-shrink:0;margin-left:auto;opacity:.5;}
+.sb-bottom{margin-top:auto;}
+
+/* ── LOCKED NAV LINK ── */
+.nav-link{
+  padding:6px 14px;border-radius:6px;font-size:13px;color:var(--dim);
+  text-decoration:none;transition:all .15s;font-weight:400;
+  display:flex;align-items:center;gap:6px;
 }
+.nav-link.active{color:var(--white);}
+.nav-link.locked{opacity:.55;cursor:not-allowed;pointer-events:none;}
+.nav-link svg{width:11px;height:11px;stroke:currentColor;fill:none;stroke-width:2.5;}
 
-/* force button colors — block typeform override */
-.btn-white{
-background:var(–white)!important;
-color:var(–bg)!important;
-font-family:‘DM Sans’,sans-serif!important;
-}
-.filter-pill{color:var(–dim)!important;}
-.filter-pill.on{background:var(–white)!important;color:var(–bg)!important;}
-.notify-btn{
-background:var(–white)!important;
-color:var(–bg)!important;
-font-family:‘DM Sans’,sans-serif!important;
-}
+/* ── DESKTOP OVERRIDES ── */
+@media(min-width:769px){
+  body{overflow:hidden;height:100vh;display:flex;flex-direction:column;}
 
-/* hide sidebar */
-.sidebar{display:none!important;}
+  .nav{height:56px;padding:0 28px;gap:32px;}
+  .nav-links{display:flex;align-items:center;gap:4px;}
 
-/* body layout — stack vertically, no height lock */
-.body-wrap{
-display:flex!important;flex-direction:column!important;
-flex:1!important;overflow:visible!important;
-height:auto!important;
-}
+  .page{flex:1;overflow:hidden;}
 
-/* main full width */
-.main{
-display:flex!important;flex-direction:column!important;
-width:100%!important;overflow:visible!important;
-height:auto!important;
-}
+  .sidebar{
+    display:flex;flex-direction:column;
+    width:200px;flex-shrink:0;
+    border-right:1px solid var(--b1);
+    background:var(--s1);padding:20px 0;
+    overflow-y:auto;
+  }
 
-/* filter bar */
-.filter-bar{
-height:auto!important;padding:10px 16px!important;
-overflow-x:auto!important;scrollbar-width:none!important;
-flex-wrap:nowrap!important;-webkit-overflow-scrolling:touch!important;
-flex-shrink:0!important;
-}
-.filter-bar::-webkit-scrollbar{display:none!important;}
-.filter-sep{display:none!important;}
+  .main{overflow:hidden;}
 
-/* content — no height lock, scrolls naturally */
-.content{
-flex:none!important;overflow:visible!important;
-height:auto!important;
-padding:20px 16px 60px!important;
-}
+  .filter-bar{
+    position:static;
+    padding:0 28px;height:48px;
+    flex-wrap:nowrap;overflow-x:visible;
+  }
 
-/* cards — smaller to fit mobile */
-.ccard{width:155px!important;height:230px!important;}
-.ccard-bg svg{width:80px!important;height:80px!important;}
-.ccard-title{font-size:11px!important;}
-.cstat-val{font-size:9px!important;}
+  .content{
+    flex:1;overflow-y:auto;
+    padding:24px 28px 60px;
+  }
+  .content::-webkit-scrollbar{width:3px;}
+  .content::-webkit-scrollbar-thumb{background:var(--b2);border-radius:2px;}
 
-/* remove big bottom margin on card row */
-.card-row{margin-bottom:24px!important;}
+  .ccard{width:190px;height:270px;}
+  .ccard-bg svg{width:110px;height:110px;}
+  .ccard-title{font-size:13px;}
+  .cstat-val{font-size:10px;}
 
-/* notify section */
-.notify-wrap{padding:32px 20px!important;border-radius:10px!important;}
-.notify-title{font-size:17px!important;color:var(–white)!important;}
-.notify-sub{font-size:12px!important;color:var(–dim)!important;}
-.notify-btn{width:100%!important;padding:14px!important;}
-.notify-diamond{width:28px!important;height:28px!important;}
-.notify-diamond::after{inset:5px!important;}
-.notify-note{color:#686868!important;}
+  .notify-wrap{padding:40px;}
+  .notify-title{font-size:20px;}
+  .notify-sub{font-size:13px;max-width:360px;}
 }
 </style>
-
 </head>
 <body>
 
 <!-- NAV -->
-
 <nav class="nav">
   <a href="#" class="nav-logo">
     <div class="logo-diamond"></div>
@@ -501,12 +314,10 @@ padding:20px 16px 60px!important;
   <button class="btn btn-white" data-tf-popup="H8bd5u0p" data-tf-opacity="100" data-tf-size="100" data-tf-medium="snippet">Get Notified</button>
 </nav>
 
-<!-- BODY -->
+<!-- PAGE -->
+<div class="page">
 
-<div class="body-wrap">
-
-  <!-- SIDEBAR -->
-
+  <!-- SIDEBAR (desktop only) -->
   <aside class="sidebar">
     <div class="sb-label">General</div>
     <a href="#" class="sb-item active">
@@ -524,89 +335,82 @@ padding:20px 16px 60px!important;
       Live Support
       <svg class="lock-icon" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
     </a>
+    <div class="sb-bottom">
+    </div>
   </aside>
 
   <!-- MAIN -->
-
   <div class="main">
 
-```
-<!-- FILTER BAR -->
-<div class="filter-bar">
-  <button class="filter-pill on" onclick="setFilter(this,'all')">All</button>
-  <button class="filter-pill" onclick="setFilter(this,'tiktok')">TikTok</button>
-  <button class="filter-pill" onclick="setFilter(this,'ig')">Instagram</button>
-  <button class="filter-pill" onclick="setFilter(this,'yt')">YouTube</button>
-  <div class="filter-sep"></div>
-</div>
-
-<!-- CONTENT -->
-<div class="content">
-
-  <!-- COMING SOON -->
-  <div class="sect">
-    <span class="sect-title">Coming Soon</span>
-    <div class="sect-arrows">
-      <div class="sarr" onclick="scrollRow('activeRow',-1)"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg></div>
-      <div class="sarr" onclick="scrollRow('activeRow',1)"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></div>
+    <!-- FILTER BAR -->
+    <div class="filter-bar">
+      <button class="filter-pill on" onclick="setFilter(this,'all')">All</button>
+      <button class="filter-pill" onclick="setFilter(this,'tiktok')">TikTok</button>
+      <button class="filter-pill" onclick="setFilter(this,'ig')">Instagram</button>
+      <button class="filter-pill" onclick="setFilter(this,'yt')">YouTube</button>
     </div>
-  </div>
-  <div class="card-row" id="activeRow"></div>
 
-  <!-- NOTIFY -->
-  <div class="notify-wrap">
-    <div class="notify-diamond"></div>
-    <div class="notify-title">Epidemic is launching soon.</div>
-    <div class="notify-sub">
-      Be the first to know when campaigns go live. Drop your email and we'll notify you the moment Epidemic opens.
+    <!-- CONTENT -->
+    <div class="content">
+
+      <div class="sect">
+        <span class="sect-title">Coming Soon</span>
+        <div class="sect-arrows">
+          <div class="sarr" onclick="scrollRow('activeRow',-1)"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg></div>
+          <div class="sarr" onclick="scrollRow('activeRow',1)"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></div>
+        </div>
+      </div>
+      <div class="card-row" id="activeRow"></div>
+
+      <div class="notify-wrap">
+        <div class="notify-diamond"></div>
+        <div class="notify-title">Epidemic is launching soon.</div>
+        <div class="notify-sub">Be the first to know when campaigns go live. Drop your email and we'll notify you the moment Epidemic opens.</div>
+        <button class="notify-btn" data-tf-popup="H8bd5u0p" data-tf-opacity="100" data-tf-size="100" data-tf-medium="snippet">Get Notified</button>
+        <div class="notify-note">No spam. Launch notification only.</div>
+      </div>
+
     </div>
-    <button class="notify-btn" data-tf-popup="H8bd5u0p" data-tf-opacity="100" data-tf-size="100" data-tf-iframe-props="title=Epidemic Notify" data-tf-transitive-search-params data-tf-medium="snippet">Get Notified</button>
-    <div class="notify-note">No spam. Launch notification only.</div>
-  </div>
-
-</div>
-```
-
   </div>
 </div>
 
 <script>
 const icn = {
-  tiktok:`<svg viewBox="0 0 24 24" style="width:10px;height:10px;fill:rgba(255,255,255,.5)"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.77 0 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.34 6.34 0 1 0 5.54 6.29V8.69a8.18 8.18 0 0 0 4.78 1.52V6.76a4.85 4.85 0 0 1-1.01-.07z"/></svg>`,
-  ig:`<svg viewBox="0 0 24 24" style="width:10px;height:10px;fill:none;stroke:rgba(255,255,255,.5);stroke-width:2"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>`,
-  yt:`<svg viewBox="0 0 24 24" style="width:10px;height:10px;fill:rgba(255,255,255,.5)"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46a2.78 2.78 0 0 0-1.95 1.96A29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.95 1.95C5.12 20 12 20 12 20s6.88 0 8.59-.47a2.78 2.78 0 0 0 1.95-1.95A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98" fill="#080808"/></svg>`
+  tiktok:`<svg viewBox="0 0 24 24" style="width:9px;height:9px;fill:rgba(255,255,255,.65)"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.77 0 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.34 6.34 0 1 0 5.54 6.29V8.69a8.18 8.18 0 0 0 4.78 1.52V6.76a4.85 4.85 0 0 1-1.01-.07z"/></svg>`,
+  ig:`<svg viewBox="0 0 24 24" style="width:9px;height:9px;fill:none;stroke:rgba(255,255,255,.65);stroke-width:2"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>`,
+  yt:`<svg viewBox="0 0 24 24" style="width:9px;height:9px;fill:rgba(255,255,255,.65)"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46a2.78 2.78 0 0 0-1.95 1.96A29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.95 1.95C5.12 20 12 20 12 20s6.88 0 8.59-.47a2.78 2.78 0 0 0 1.95-1.95A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98" fill="#0e0e0e"/></svg>`
 };
 
 const artistIcons = {
-  "KEN CARSON":      `<svg viewBox="0 0 60 60" width="72" height="72"><circle cx="30" cy="30" r="30" fill="#1a0a2e"/><text x="30" y="38" text-anchor="middle" font-size="28" font-family="serif" fill="#a855f7">KC</text></svg>`,
-  "DON TOLIVER":     `<svg viewBox="0 0 60 60" width="72" height="72"><circle cx="30" cy="30" r="30" fill="#0a1a2e"/><text x="30" y="38" text-anchor="middle" font-size="28" font-family="serif" fill="#38bdf8">DT</text></svg>`,
-  "DAVE":            `<svg viewBox="0 0 60 60" width="72" height="72"><circle cx="30" cy="30" r="30" fill="#0a1a10"/><text x="30" y="38" text-anchor="middle" font-size="28" font-family="serif" fill="#4ade80">DV</text></svg>`,
-  "THE WEEKND":      `<svg viewBox="0 0 60 60" width="72" height="72"><circle cx="30" cy="30" r="30" fill="#1a0a0a"/><text x="30" y="38" text-anchor="middle" font-size="28" font-family="serif" fill="#f87171">TW</text></svg>`,
-  "BRENT FAIYAZ":    `<svg viewBox="0 0 60 60" width="72" height="72"><circle cx="30" cy="30" r="30" fill="#1a1500"/><text x="30" y="38" text-anchor="middle" font-size="28" font-family="serif" fill="#fbbf24">BF</text></svg>`,
-  "GUNNA":           `<svg viewBox="0 0 60 60" width="72" height="72"><circle cx="30" cy="30" r="30" fill="#001a1a"/><text x="30" y="38" text-anchor="middle" font-size="28" font-family="serif" fill="#2dd4bf">GN</text></svg>`,
-  "CENTRAL CEE":     `<svg viewBox="0 0 60 60" width="72" height="72"><circle cx="30" cy="30" r="30" fill="#0a0a1a"/><text x="30" y="38" text-anchor="middle" font-size="28" font-family="serif" fill="#818cf8">CC</text></svg>`,
-  "ASAP ROCKY":      `<svg viewBox="0 0 60 60" width="72" height="72"><circle cx="30" cy="30" r="30" fill="#1a0a10"/><text x="30" y="38" text-anchor="middle" font-size="28" font-family="serif" fill="#fb7185">AR</text></svg>`,
-  "TYLER, THE CREATOR":`<svg viewBox="0 0 60 60" width="72" height="72"><circle cx="30" cy="30" r="30" fill="#001a0a"/><text x="30" y="38" text-anchor="middle" font-size="24" font-family="serif" fill="#86efac">TTC</text></svg>`,
-  "PINKPANTHERESS":  `<svg viewBox="0 0 60 60" width="72" height="72"><circle cx="30" cy="30" r="30" fill="#1a001a"/><text x="30" y="38" text-anchor="middle" font-size="22" font-family="serif" fill="#f0abfc">PP</text></svg>`,
+  "KEN CARSON":         `<svg viewBox="0 0 60 60" width="80" height="80"><circle cx="30" cy="30" r="30" fill="#1a0a2e"/><text x="30" y="38" text-anchor="middle" font-size="22" font-family="serif" fill="#a855f7">KC</text></svg>`,
+  "DON TOLIVER":        `<svg viewBox="0 0 60 60" width="80" height="80"><circle cx="30" cy="30" r="30" fill="#0a1a2e"/><text x="30" y="38" text-anchor="middle" font-size="22" font-family="serif" fill="#38bdf8">DT</text></svg>`,
+  "DAVE":               `<svg viewBox="0 0 60 60" width="80" height="80"><circle cx="30" cy="30" r="30" fill="#0a1a10"/><text x="30" y="38" text-anchor="middle" font-size="22" font-family="serif" fill="#4ade80">DV</text></svg>`,
+  "THE WEEKND":         `<svg viewBox="0 0 60 60" width="80" height="80"><circle cx="30" cy="30" r="30" fill="#1a0a0a"/><text x="30" y="38" text-anchor="middle" font-size="22" font-family="serif" fill="#f87171">TW</text></svg>`,
+  "BRENT FAIYAZ":       `<svg viewBox="0 0 60 60" width="80" height="80"><circle cx="30" cy="30" r="30" fill="#1a1500"/><text x="30" y="38" text-anchor="middle" font-size="22" font-family="serif" fill="#fbbf24">BF</text></svg>`,
+  "GUNNA":              `<svg viewBox="0 0 60 60" width="80" height="80"><circle cx="30" cy="30" r="30" fill="#001a1a"/><text x="30" y="38" text-anchor="middle" font-size="22" font-family="serif" fill="#2dd4bf">GN</text></svg>`,
+  "CENTRAL CEE":        `<svg viewBox="0 0 60 60" width="80" height="80"><circle cx="30" cy="30" r="30" fill="#0a0a1a"/><text x="30" y="38" text-anchor="middle" font-size="22" font-family="serif" fill="#818cf8">CC</text></svg>`,
+  "ASAP ROCKY":         `<svg viewBox="0 0 60 60" width="80" height="80"><circle cx="30" cy="30" r="30" fill="#1a0a10"/><text x="30" y="38" text-anchor="middle" font-size="22" font-family="serif" fill="#fb7185">AR</text></svg>`,
+  "TYLER, THE CREATOR": `<svg viewBox="0 0 60 60" width="80" height="80"><circle cx="30" cy="30" r="30" fill="#001a0a"/><text x="30" y="38" text-anchor="middle" font-size="18" font-family="serif" fill="#86efac">TTC</text></svg>`,
+  "PINKPANTHERESS":     `<svg viewBox="0 0 60 60" width="80" height="80"><circle cx="30" cy="30" r="30" fill="#1a001a"/><text x="30" y="38" text-anchor="middle" font-size="18" font-family="serif" fill="#f0abfc">PP</text></svg>`,
 };
 
 const campaigns = [
-  {title:"KEN CARSON",          budget:"$9,000", cpm:"$2.50", pct:0, platforms:["tiktok"],         bg:"linear-gradient(150deg,#0d0618,#1a0a2e)"},
-  {title:"DON TOLIVER",         budget:"$2,400", cpm:"$2.50", pct:0, platforms:["tiktok"],         bg:"linear-gradient(150deg,#060e18,#0a1a2e)"},
-  {title:"DAVE",                budget:"$5,000", cpm:"$1.50", pct:0, platforms:["ig"],             bg:"linear-gradient(150deg,#060e08,#0a1a10)"},
-  {title:"THE WEEKND",          budget:"$3,600", cpm:"$1.25", pct:0, platforms:["ig"],             bg:"linear-gradient(150deg,#120606,#1a0a0a)"},
-  {title:"BRENT FAIYAZ",        budget:"$7,500", cpm:"$2.00", pct:0, platforms:["yt"],             bg:"linear-gradient(150deg,#120e00,#1a1500)"},
-  {title:"GUNNA",               budget:"$3,200", cpm:"$2.00", pct:0, platforms:["yt"],             bg:"linear-gradient(150deg,#001212,#001a1a)"},
-  {title:"CENTRAL CEE",         budget:"$1,200", cpm:"$1.00", pct:0, platforms:["ig"],             bg:"linear-gradient(150deg,#060612,#0a0a1a)"},
-  {title:"ASAP ROCKY",          budget:"$9,300", cpm:"$1.00", pct:0, platforms:["tiktok","ig","yt"],bg:"linear-gradient(150deg,#12060a,#1a0a10)"},
-  {title:"TYLER, THE CREATOR",  budget:"$6,000", cpm:"$2.00", pct:0, platforms:["tiktok","ig"],    bg:"linear-gradient(150deg,#001206,#001a0a)"},
-  {title:"PINKPANTHERESS",      budget:"$4,500", cpm:"$1.75", pct:0, platforms:["tiktok","ig"],    bg:"linear-gradient(150deg,#120012,#1a001a)"},
+  {title:"KEN CARSON",          budget:"$9,000", cpm:"$2.50", platforms:["tiktok"],          bg:"linear-gradient(150deg,#0d0618,#1a0a2e)"},
+  {title:"DON TOLIVER",         budget:"$2,400", cpm:"$2.50", platforms:["tiktok"],          bg:"linear-gradient(150deg,#060e18,#0a1a2e)"},
+  {title:"DAVE",                budget:"$5,000", cpm:"$1.50", platforms:["ig"],              bg:"linear-gradient(150deg,#060e08,#0a1a10)"},
+  {title:"THE WEEKND",          budget:"$3,600", cpm:"$1.25", platforms:["ig"],              bg:"linear-gradient(150deg,#120606,#1a0a0a)"},
+  {title:"BRENT FAIYAZ",        budget:"$7,500", cpm:"$2.00", platforms:["yt"],              bg:"linear-gradient(150deg,#120e00,#1a1500)"},
+  {title:"GUNNA",               budget:"$3,200", cpm:"$2.00", platforms:["yt"],              bg:"linear-gradient(150deg,#001212,#001a1a)"},
+  {title:"CENTRAL CEE",         budget:"$1,200", cpm:"$1.00", platforms:["ig"],              bg:"linear-gradient(150deg,#060612,#0a0a1a)"},
+  {title:"ASAP ROCKY",          budget:"$9,300", cpm:"$1.00", platforms:["tiktok","ig","yt"],bg:"linear-gradient(150deg,#12060a,#1a0a10)"},
+  {title:"TYLER, THE CREATOR",  budget:"$6,000", cpm:"$2.00", platforms:["tiktok","ig"],    bg:"linear-gradient(150deg,#001206,#001a0a)"},
+  {title:"PINKPANTHERESS",      budget:"$4,500", cpm:"$1.75", platforms:["tiktok","ig"],    bg:"linear-gradient(150deg,#120012,#1a001a)"},
 ];
 
-const lockSVG = `<svg viewBox="0 0 24 24" style="width:20px;height:20px;stroke:rgba(255,255,255,.3);fill:none;stroke-width:1.8"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>`;
+const lockSVG=`<svg viewBox="0 0 24 24" style="width:18px;height:18px;stroke:rgba(255,255,255,.3);fill:none;stroke-width:1.8"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>`;
 
-function renderCard(c) {
-  const plats = c.platforms.map(p=>`<div class="cplat">${icn[p]}</div>`).join('');
+function renderCard(c){
+  const plats=c.platforms.map(p=>`<div class="cplat">${icn[p]}</div>`).join('');
   return `
     <div class="ccard">
       <div class="ccard-bg" style="background:${c.bg}">${artistIcons[c.title]||''}</div>
@@ -615,55 +419,33 @@ function renderCard(c) {
         <div class="ccard-title">${c.title}</div>
         <div class="ccard-plats">${plats}</div>
       </div>
-      <div class="ccard-lock">
-        <div class="lock-badge">
-          ${lockSVG}
-          <span class="lock-badge-txt">Coming Soon</span>
-        </div>
-      </div>
+      <div class="ccard-lock"><div class="lock-badge">${lockSVG}<span class="lock-badge-txt">Coming Soon</span></div></div>
       <div class="ccard-bottom">
         <div class="ccard-stats">
-          <div class="cstat">
-            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-            <span class="cstat-val">${c.budget}</span>
-          </div>
-          <div class="cstat">
-            <svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
-            <span class="cstat-val">${c.cpm}/1K</span>
-          </div>
+          <div class="cstat"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg><span class="cstat-val">${c.budget}</span></div>
+          <div class="cstat"><svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg><span class="cstat-val">${c.cpm}/1K</span></div>
         </div>
         <div class="cprog"><div class="cprog-fill" style="width:0%"></div></div>
       </div>
     </div>`;
 }
 
-let currentFilter = 'all';
+let currentFilter='all';
 
-function renderActive() {
-  const filtered = currentFilter === 'all'
-    ? campaigns
-    : campaigns.filter(c => c.platforms.includes(currentFilter));
-  document.getElementById('activeRow').innerHTML = filtered.map(renderCard).join('');
-
+function renderActive(){
+  const filtered=currentFilter==='all'?campaigns:campaigns.filter(c=>c.platforms.includes(currentFilter));
+  document.getElementById('activeRow').innerHTML=filtered.map(renderCard).join('');
 }
 
-function setFilter(el, cat) {
-  document.querySelectorAll('.filter-pill').forEach(p => p.classList.remove('on'));
-  el.classList.add('on');
-  currentFilter = cat;
-  renderActive();
+function setFilter(el,cat){
+  document.querySelectorAll('.filter-pill').forEach(p=>p.classList.remove('on'));
+  el.classList.add('on');currentFilter=cat;renderActive();
 }
 
-function scrollRow(id, dir) {
-  document.getElementById(id).scrollBy({left: dir * 420, behavior:'smooth'});
-}
-
-
+function scrollRow(id,dir){document.getElementById(id).scrollBy({left:dir*400,behavior:'smooth'});}
 
 renderActive();
 </script>
-
-  <script src="//embed.typeform.com/next/embed.js"></script>
-
+<script src="//embed.typeform.com/next/embed.js"></script>
 </body>
 </html>

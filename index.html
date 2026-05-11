@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -21,363 +22,415 @@
   --white: #ffffff;
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html,body{height:100%;overflow:hidden}
+html,body{height:100%;overflow:hidden;}
+@media(max-width:768px){html,body{height:auto;overflow:auto;}}
 body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;font-size:14px;-webkit-font-smoothing:antialiased;display:flex;flex-direction:column}
 
 /* ── NAV ── */
 .nav{
-  height:56px;flex-shrink:0;
-  display:flex;align-items:center;
-  padding:0 28px;gap:32px;
-  border-bottom:1px solid var(--b1);
-  background:var(--s1);
+height:56px;flex-shrink:0;
+display:flex;align-items:center;
+padding:0 28px;gap:32px;
+border-bottom:1px solid var(–b1);
+background:var(–s1);
 }
 .nav-logo{
-  display:flex;align-items:center;gap:10px;
-  text-decoration:none;flex-shrink:0;
+display:flex;align-items:center;gap:10px;
+text-decoration:none;flex-shrink:0;
 }
 .logo-diamond{
-  width:22px;height:22px;
-  border:1.5px solid var(--b3);
-  transform:rotate(45deg);
-  position:relative;flex-shrink:0;
+width:22px;height:22px;
+border:1.5px solid var(–b3);
+transform:rotate(45deg);
+position:relative;flex-shrink:0;
 }
 .logo-diamond::after{
-  content:'';position:absolute;inset:4px;
-  background:var(--white);
+content:’’;position:absolute;inset:4px;
+background:var(–white);
 }
 .nav-name{
-  font-family:'Syne',sans-serif;
-  font-weight:800;font-size:14px;
-  letter-spacing:0.1em;text-transform:uppercase;
-  color:var(--white);
+font-family:‘Syne’,sans-serif;
+font-weight:800;font-size:14px;
+letter-spacing:0.1em;text-transform:uppercase;
+color:var(–white);
 }
 .nav-links{
-  display:flex;align-items:center;gap:4px;
+display:flex;align-items:center;gap:4px;
 }
 .nav-link{
-  padding:6px 14px;border-radius:6px;
-  font-size:13px;color:var(--dim);
-  text-decoration:none;transition:all .15s;
-  font-weight:400;display:flex;align-items:center;gap:6px;
+padding:6px 14px;border-radius:6px;
+font-size:13px;color:var(–dim);
+text-decoration:none;transition:all .15s;
+font-weight:400;display:flex;align-items:center;gap:6px;
 }
-.nav-link:hover{color:var(--text);background:var(--s2);}
-.nav-link.active{color:var(--white);}
+.nav-link:hover{color:var(–text);background:var(–s2);}
+.nav-link.active{color:var(–white);}
 .nav-link.locked{opacity:.55;cursor:not-allowed;pointer-events:none;}
 .nav-link svg{width:11px;height:11px;stroke:currentColor;fill:none;stroke-width:2.5;}
 .nav-sep{flex:1;}
 .btn{
-  padding:7px 18px;border-radius:6px;
-  font-size:12px;font-weight:500;
-  cursor:pointer;border:none;
-  font-family:'DM Sans',sans-serif;
-  letter-spacing:0.02em;transition:all .15s;
+padding:7px 18px;border-radius:6px;
+font-size:12px;font-weight:500;
+cursor:pointer;border:none;
+font-family:‘DM Sans’,sans-serif;
+letter-spacing:0.02em;transition:all .15s;
 }
-.btn-white{background:var(--white);color:var(--bg);font-weight:600;}
+.btn-white{background:var(–white);color:var(–bg);font-weight:600;}
 .btn-white:hover{background:#e8e8e8;}
 
 /* ── BODY LAYOUT ── */
 .body-wrap{
-  flex:1;display:flex;overflow:hidden;
+flex:1;display:flex;overflow:hidden;
 }
 
 /* ── SIDEBAR ── */
 .sidebar{
-  width:200px;flex-shrink:0;
-  border-right:1px solid var(--b1);
-  background:var(--s1);
-  display:flex;flex-direction:column;
-  padding:20px 0;
+width:200px;flex-shrink:0;
+border-right:1px solid var(–b1);
+background:var(–s1);
+display:flex;flex-direction:column;
+padding:20px 0;
 }
 .sb-label{
-  font-family:'DM Mono',monospace;
-  font-size:9px;letter-spacing:0.2em;
-  text-transform:uppercase;color:#686868;
-  padding:0 20px 8px;margin-top:8px;
+font-family:‘DM Mono’,monospace;
+font-size:9px;letter-spacing:0.2em;
+text-transform:uppercase;color:#686868;
+padding:0 20px 8px;margin-top:8px;
 }
 .sb-item{
-  display:flex;align-items:center;gap:10px;
-  padding:9px 20px;cursor:pointer;
-  font-size:13px;color:var(--dim);
-  text-decoration:none;
-  transition:all .12s;position:relative;
+display:flex;align-items:center;gap:10px;
+padding:9px 20px;cursor:pointer;
+font-size:13px;color:var(–dim);
+text-decoration:none;
+transition:all .12s;position:relative;
 }
-.sb-item:hover:not(.locked){color:var(--text);background:var(--s2);}
-.sb-item.active{color:var(--white);}
+.sb-item:hover:not(.locked){color:var(–text);background:var(–s2);}
+.sb-item.active{color:var(–white);}
 .sb-item.active::before{
-  content:'';position:absolute;
-  left:0;top:50%;transform:translateY(-50%);
-  width:2px;height:18px;
-  background:var(--white);
-  border-radius:0 2px 2px 0;
+content:’’;position:absolute;
+left:0;top:50%;transform:translateY(-50%);
+width:2px;height:18px;
+background:var(–white);
+border-radius:0 2px 2px 0;
 }
 .sb-item.locked{opacity:.55;cursor:not-allowed;}
 .sb-item svg{
-  width:14px;height:14px;stroke:currentColor;
-  fill:none;stroke-width:1.8;flex-shrink:0;opacity:.6;
+width:14px;height:14px;stroke:currentColor;
+fill:none;stroke-width:1.8;flex-shrink:0;opacity:.6;
 }
 .sb-item.active svg{opacity:1;}
 .lock-icon{
-  width:12px;height:12px;stroke:currentColor;
-  fill:none;stroke-width:2;flex-shrink:0;
-  margin-left:auto;opacity:.5;
+width:12px;height:12px;stroke:currentColor;
+fill:none;stroke-width:2;flex-shrink:0;
+margin-left:auto;opacity:.5;
 }
 
 /* ── MAIN ── */
 .main{
-  flex:1;display:flex;flex-direction:column;
-  overflow:hidden;
+flex:1;display:flex;flex-direction:column;
+overflow:hidden;
 }
 
 /* ── FILTER BAR ── */
 .filter-bar{
-  height:48px;flex-shrink:0;
-  display:flex;align-items:center;
-  gap:6px;padding:0 28px;
-  border-bottom:1px solid var(--b1);
-  background:var(--s1);
+height:48px;flex-shrink:0;
+display:flex;align-items:center;
+gap:6px;padding:0 28px;
+border-bottom:1px solid var(–b1);
+background:var(–s1);
 }
 .filter-pill{
-  padding:5px 14px;border-radius:5px;
-  font-size:12px;color:var(--dim);
-  border:1px solid transparent;
-  cursor:pointer;transition:all .12s;
-  font-family:'DM Sans',sans-serif;background:transparent;
+padding:5px 14px;border-radius:5px;
+font-size:12px;color:var(–dim);
+border:1px solid transparent;
+cursor:pointer;transition:all .12s;
+font-family:‘DM Sans’,sans-serif;background:transparent;
 }
-.filter-pill:hover{color:var(--text);border-color:var(--b1);}
+.filter-pill:hover{color:var(–text);border-color:var(–b1);}
 .filter-pill.on{
-  background:var(--white);color:var(--bg);
-  font-weight:500;
+background:var(–white);color:var(–bg);
+font-weight:500;
 }
 .filter-sep{flex:1;}
 .filter-count{
-  font-family:'DM Mono',monospace;
-  font-size:10px;color:var(--muted);
-  letter-spacing:0.1em;
+font-family:‘DM Mono’,monospace;
+font-size:10px;color:var(–muted);
+letter-spacing:0.1em;
 }
 
 /* ── CONTENT ── */
 .content{
-  flex:1;overflow-y:auto;
-  padding:28px 28px 60px;
+flex:1;overflow-y:auto;
+padding:28px 28px 60px;
 }
 .content::-webkit-scrollbar{width:3px;}
-.content::-webkit-scrollbar-thumb{background:var(--b2);border-radius:2px;}
+.content::-webkit-scrollbar-thumb{background:var(–b2);border-radius:2px;}
 
 /* ── SECTION TITLE ── */
 .sect{
-  display:flex;align-items:center;
-  justify-content:space-between;
-  margin-bottom:14px;
+display:flex;align-items:center;
+justify-content:space-between;
+margin-bottom:14px;
 }
 .sect-title{
-  font-family:'DM Mono',monospace;
-  font-size:10px;letter-spacing:0.18em;
-  text-transform:uppercase;color:var(--dim);
+font-family:‘DM Mono’,monospace;
+font-size:10px;letter-spacing:0.18em;
+text-transform:uppercase;color:var(–dim);
 }
 .sect-arrows{display:flex;gap:4px;}
 .sarr{
-  width:24px;height:24px;border-radius:4px;
-  background:var(--s2);border:1px solid var(--b1);
-  display:flex;align-items:center;justify-content:center;
-  cursor:pointer;color:var(--muted);transition:all .12s;
+width:24px;height:24px;border-radius:4px;
+background:var(–s2);border:1px solid var(–b1);
+display:flex;align-items:center;justify-content:center;
+cursor:pointer;color:var(–muted);transition:all .12s;
 }
-.sarr:hover{color:var(--text);border-color:var(--b2);}
+.sarr:hover{color:var(–text);border-color:var(–b2);}
 .sarr svg{width:10px;height:10px;stroke:currentColor;fill:none;stroke-width:2.5;}
 
 /* ── CARD ROW ── */
 .card-row{
-  display:flex;gap:10px;
-  overflow-x:auto;padding-bottom:4px;
-  scroll-behavior:smooth;scrollbar-width:none;
-  margin-bottom:40px;
+display:flex;gap:10px;
+overflow-x:auto;padding-bottom:4px;
+scroll-behavior:smooth;scrollbar-width:none;
+margin-bottom:40px;
 }
 .card-row::-webkit-scrollbar{display:none;}
 
 /* ── CAMPAIGN CARD ── */
 .ccard{
-  flex-shrink:0;width:190px;height:270px;
-  border-radius:10px;overflow:hidden;
-  position:relative;cursor:not-allowed;
-  border:1px solid var(--b1);
-  background:var(--s2);
-  transition:border-color .2s,transform .2s,box-shadow .2s;
+flex-shrink:0;width:190px;height:270px;
+border-radius:10px;overflow:hidden;
+position:relative;cursor:not-allowed;
+border:1px solid var(–b1);
+background:var(–s2);
+transition:border-color .2s,transform .2s,box-shadow .2s;
 }
 .ccard-bg{
-  position:absolute;inset:0;
-  display:flex;align-items:center;
-  justify-content:center;
-  opacity:.55;
+position:absolute;inset:0;
+display:flex;align-items:center;
+justify-content:center;
+opacity:.55;
 }
 .ccard-bg svg{width:110px;height:110px;}
 .ccard-overlay{
-  position:absolute;inset:0;
-  background:linear-gradient(
-    to bottom,
-    rgba(8,8,8,.6) 0%,
-    rgba(8,8,8,.1) 35%,
-    rgba(8,8,8,.1) 50%,
-    rgba(8,8,8,.97) 100%
-  );
+position:absolute;inset:0;
+background:linear-gradient(
+to bottom,
+rgba(8,8,8,.6) 0%,
+rgba(8,8,8,.1) 35%,
+rgba(8,8,8,.1) 50%,
+rgba(8,8,8,.97) 100%
+);
 }
 /* frosted lock overlay */
 .ccard-lock{
-  position:absolute;inset:0;z-index:4;
-  display:flex;align-items:center;justify-content:center;
-  background:rgba(8,8,8,.18);
-  backdrop-filter:blur(1px);
+position:absolute;inset:0;z-index:4;
+display:flex;align-items:center;justify-content:center;
+background:rgba(8,8,8,.18);
+backdrop-filter:blur(1px);
 }
 .lock-badge{
-  display:flex;flex-direction:column;
-  align-items:center;gap:7px;
+display:flex;flex-direction:column;
+align-items:center;gap:7px;
 }
 .lock-badge svg{
-  width:20px;height:20px;
-  stroke:rgba(255,255,255,.35);
-  fill:none;stroke-width:1.8;
+width:20px;height:20px;
+stroke:rgba(255,255,255,.35);
+fill:none;stroke-width:1.8;
 }
 .lock-badge-txt{
-  font-family:'DM Mono',monospace;
-  font-size:8px;letter-spacing:0.2em;
-  text-transform:uppercase;
-  color:rgba(255,255,255,.25);
+font-family:‘DM Mono’,monospace;
+font-size:8px;letter-spacing:0.2em;
+text-transform:uppercase;
+color:rgba(255,255,255,.25);
 }
 .ccard-top{
-  position:absolute;top:10px;left:10px;right:10px;
-  display:flex;justify-content:space-between;
-  align-items:flex-start;z-index:2;
+position:absolute;top:10px;left:10px;right:10px;
+display:flex;justify-content:space-between;
+align-items:flex-start;z-index:2;
 }
 .ccard-title{
-  font-family:'Syne',sans-serif;
-  font-weight:800;font-size:13px;
-  color:rgba(255,255,255,.4);line-height:1.2;
-  text-shadow:0 2px 12px rgba(0,0,0,.9);
-  max-width:65%;
+font-family:‘Syne’,sans-serif;
+font-weight:800;font-size:13px;
+color:rgba(255,255,255,.4);line-height:1.2;
+text-shadow:0 2px 12px rgba(0,0,0,.9);
+max-width:65%;
 }
 .ccard-plats{display:flex;gap:3px;}
 .cplat{
-  width:22px;height:22px;border-radius:4px;
-  background:rgba(8,8,8,.6);
-  border:1px solid rgba(255,255,255,.05);
-  display:flex;align-items:center;justify-content:center;
-  opacity:.4;
+width:22px;height:22px;border-radius:4px;
+background:rgba(8,8,8,.6);
+border:1px solid rgba(255,255,255,.05);
+display:flex;align-items:center;justify-content:center;
+opacity:.4;
 }
 .cplat svg{width:10px;height:10px;}
 .ccard-bottom{
-  position:absolute;bottom:0;left:0;right:0;
-  padding:12px;z-index:2;
+position:absolute;bottom:0;left:0;right:0;
+padding:12px;z-index:2;
 }
 .ccard-stats{
-  display:flex;gap:5px;margin-bottom:8px;
+display:flex;gap:5px;margin-bottom:8px;
 }
 .cstat{
-  flex:1;
-  background:rgba(8,8,8,.6);
-  border:1px solid rgba(255,255,255,.04);
-  border-radius:4px;padding:5px 8px;
-  display:flex;align-items:center;gap:4px;
-  opacity:.4;
+flex:1;
+background:rgba(8,8,8,.6);
+border:1px solid rgba(255,255,255,.04);
+border-radius:4px;padding:5px 8px;
+display:flex;align-items:center;gap:4px;
+opacity:.4;
 }
 .cstat svg{
-  width:9px;height:9px;stroke:var(--dim);
-  fill:none;stroke-width:2;flex-shrink:0;
+width:9px;height:9px;stroke:var(–dim);
+fill:none;stroke-width:2;flex-shrink:0;
 }
 .cstat-val{
-  font-family:'DM Mono',monospace;
-  font-size:10px;color:rgba(255,255,255,.6);
-  white-space:nowrap;
+font-family:‘DM Mono’,monospace;
+font-size:10px;color:rgba(255,255,255,.6);
+white-space:nowrap;
 }
 .cprog{
-  height:2px;background:rgba(255,255,255,.05);
-  border-radius:1px;overflow:hidden;
-  opacity:.4;
+height:2px;background:rgba(255,255,255,.05);
+border-radius:1px;overflow:hidden;
+opacity:.4;
 }
 .cprog-fill{
-  height:100%;background:var(--white);
-  border-radius:1px;
+height:100%;background:var(–white);
+border-radius:1px;
 }
 
 /* ── CARD COUNT BADGE ── */
 .ccard-count{
-  position:absolute;top:10px;right:10px;
-  z-index:3;
-  background:rgba(8,8,8,.85);
-  backdrop-filter:blur(8px);
-  border:1px solid rgba(255,255,255,.08);
-  border-radius:4px;
-  padding:3px 7px;
-  font-family:'DM Mono',monospace;
-  font-size:9px;
-  color:rgba(255,255,255,.3);
-  letter-spacing:0.08em;
+position:absolute;top:10px;right:10px;
+z-index:3;
+background:rgba(8,8,8,.85);
+backdrop-filter:blur(8px);
+border:1px solid rgba(255,255,255,.08);
+border-radius:4px;
+padding:3px 7px;
+font-family:‘DM Mono’,monospace;
+font-size:9px;
+color:rgba(255,255,255,.3);
+letter-spacing:0.08em;
 }
 
 /* ── NOTIFY SECTION ── */
 .notify-wrap{
-  border:1px solid var(--b1);
-  border-radius:12px;
-  padding:40px;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  text-align:center;
-  gap:20px;
-  background:var(--s1);
-  margin-top:8px;
+border:1px solid var(–b1);
+border-radius:12px;
+padding:40px;
+display:flex;
+flex-direction:column;
+align-items:center;
+text-align:center;
+gap:20px;
+background:var(–s1);
+margin-top:8px;
 }
 
 .notify-diamond{
-  width:36px;height:36px;
-  border:1.5px solid var(--b3);
-  transform:rotate(45deg);
-  position:relative;flex-shrink:0;
+width:36px;height:36px;
+border:1.5px solid var(–b3);
+transform:rotate(45deg);
+position:relative;flex-shrink:0;
 }
 .notify-diamond::after{
-  content:'';position:absolute;inset:6px;
-  background:var(--white);
+content:’’;position:absolute;inset:6px;
+background:var(–white);
 }
 
 .notify-title{
-  font-family:'Syne',sans-serif;
-  font-weight:800;font-size:20px;
-  color:var(--white);
-  letter-spacing:-0.02em;
-  line-height:1.2;
+font-family:‘Syne’,sans-serif;
+font-weight:800;font-size:20px;
+color:var(–white);
+letter-spacing:-0.02em;
+line-height:1.2;
 }
 
 .notify-sub{
-  font-size:13px;color:var(--dim);
-  font-weight:300;line-height:1.7;
-  max-width:360px;
+font-size:13px;color:var(–dim);
+font-weight:300;line-height:1.7;
+max-width:360px;
 }
 
 .notify-form{
-  display:flex;gap:8px;
-  width:100%;max-width:400px;
+display:flex;gap:8px;
+width:100%;max-width:400px;
 }
 
 .notify-btn{
-  padding:13px 36px;
-  background:var(--white);
-  color:var(--bg);
-  border:none;border-radius:7px;
-  font-family:'DM Sans',sans-serif;
-  font-size:13px;font-weight:600;
-  cursor:pointer;transition:background .15s;
+padding:13px 36px;
+background:var(–white);
+color:var(–bg);
+border:none;border-radius:7px;
+font-family:‘DM Sans’,sans-serif;
+font-size:13px;font-weight:600;
+cursor:pointer;transition:background .15s;
 }
 .notify-btn:hover{background:#e8e8e8;}
 
 .notify-note{
-  font-family:'DM Mono',monospace;
-  font-size:9px;letter-spacing:0.12em;
-  text-transform:uppercase;
-  color:#686868;
+font-family:‘DM Mono’,monospace;
+font-size:9px;letter-spacing:0.12em;
+text-transform:uppercase;
+color:#686868;
+}
+
+/* ── MOBILE ── */
+@media (max-width:768px){
+html,body{height:auto;overflow:auto;}
+body{display:block;}
+
+/* nav */
+.nav{
+position:sticky;top:0;z-index:100;
+height:52px;padding:0 16px;gap:12px;
+}
+.nav-links{display:none;}
+.nav-sep{display:none;}
+
+/* hide sidebar entirely */
+.sidebar{display:none;}
+
+/* body layout */
+.body-wrap{display:block;overflow:visible;}
+
+/* main full width */
+.main{display:block;overflow:visible;width:100%;}
+
+/* filter bar horizontal scroll */
+.filter-bar{
+height:auto;padding:10px 16px;
+overflow-x:auto;scrollbar-width:none;
+flex-wrap:nowrap;-webkit-overflow-scrolling:touch;
+}
+.filter-bar::-webkit-scrollbar{display:none;}
+.filter-sep{display:none;}
+
+/* content */
+.content{overflow:visible;padding:20px 16px 60px;}
+
+/* cards */
+.ccard{width:155px;height:230px;}
+.ccard-bg svg{width:80px;height:80px;}
+.ccard-title{font-size:11px;}
+.cstat-val{font-size:9px;}
+
+/* notify */
+.notify-wrap{padding:32px 20px;border-radius:10px;}
+.notify-title{font-size:17px;}
+.notify-sub{font-size:12px;}
+.notify-btn{width:100%;padding:14px;}
+.notify-diamond{width:28px;height:28px;}
+.notify-diamond::after{inset:5px;}
 }
 </style>
+
 </head>
 <body>
 
 <!-- NAV -->
+
 <nav class="nav">
   <a href="#" class="nav-logo">
     <div class="logo-diamond"></div>
@@ -395,9 +448,11 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;fon
 </nav>
 
 <!-- BODY -->
+
 <div class="body-wrap">
 
   <!-- SIDEBAR -->
+
   <aside class="sidebar">
     <div class="sb-label">General</div>
     <a href="#" class="sb-item active">
@@ -418,42 +473,46 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;fon
   </aside>
 
   <!-- MAIN -->
+
   <div class="main">
 
-    <!-- FILTER BAR -->
-    <div class="filter-bar">
-      <button class="filter-pill on" onclick="setFilter(this,'all')">All</button>
-      <button class="filter-pill" onclick="setFilter(this,'tiktok')">TikTok</button>
-      <button class="filter-pill" onclick="setFilter(this,'ig')">Instagram</button>
-      <button class="filter-pill" onclick="setFilter(this,'yt')">YouTube</button>
-      <div class="filter-sep"></div>
+```
+<!-- FILTER BAR -->
+<div class="filter-bar">
+  <button class="filter-pill on" onclick="setFilter(this,'all')">All</button>
+  <button class="filter-pill" onclick="setFilter(this,'tiktok')">TikTok</button>
+  <button class="filter-pill" onclick="setFilter(this,'ig')">Instagram</button>
+  <button class="filter-pill" onclick="setFilter(this,'yt')">YouTube</button>
+  <div class="filter-sep"></div>
+</div>
+
+<!-- CONTENT -->
+<div class="content">
+
+  <!-- COMING SOON -->
+  <div class="sect">
+    <span class="sect-title">Coming Soon</span>
+    <div class="sect-arrows">
+      <div class="sarr" onclick="scrollRow('activeRow',-1)"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg></div>
+      <div class="sarr" onclick="scrollRow('activeRow',1)"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></div>
     </div>
+  </div>
+  <div class="card-row" id="activeRow"></div>
 
-    <!-- CONTENT -->
-    <div class="content">
-
-      <!-- COMING SOON -->
-      <div class="sect">
-        <span class="sect-title">Coming Soon</span>
-        <div class="sect-arrows">
-          <div class="sarr" onclick="scrollRow('activeRow',-1)"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg></div>
-          <div class="sarr" onclick="scrollRow('activeRow',1)"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></div>
-        </div>
-      </div>
-      <div class="card-row" id="activeRow"></div>
-
-      <!-- NOTIFY -->
-      <div class="notify-wrap">
-        <div class="notify-diamond"></div>
-        <div class="notify-title">Epidemic is launching soon.</div>
-        <div class="notify-sub">
-          Be the first to know when campaigns go live. Drop your email and we'll notify you the moment Epidemic opens.
-        </div>
-        <button class="notify-btn" data-tf-popup="H8bd5u0p" data-tf-opacity="100" data-tf-size="100" data-tf-iframe-props="title=Epidemic Notify" data-tf-transitive-search-params data-tf-medium="snippet">Get Notified</button>
-        <div class="notify-note">No spam. Launch notification only.</div>
-      </div>
-
+  <!-- NOTIFY -->
+  <div class="notify-wrap">
+    <div class="notify-diamond"></div>
+    <div class="notify-title">Epidemic is launching soon.</div>
+    <div class="notify-sub">
+      Be the first to know when campaigns go live. Drop your email and we'll notify you the moment Epidemic opens.
     </div>
+    <button class="notify-btn" data-tf-popup="H8bd5u0p" data-tf-opacity="100" data-tf-size="100" data-tf-iframe-props="title=Epidemic Notify" data-tf-transitive-search-params data-tf-medium="snippet">Get Notified</button>
+    <div class="notify-note">No spam. Launch notification only.</div>
+  </div>
+
+</div>
+```
+
   </div>
 </div>
 
@@ -549,6 +608,8 @@ function scrollRow(id, dir) {
 
 renderActive();
 </script>
+
   <script src="//embed.typeform.com/next/embed.js"></script>
+
 </body>
 </html>

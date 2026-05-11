@@ -8,16 +8,16 @@
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400&display=swap" rel="stylesheet">
 <style>
 :root {
-  --bg:    #080808;
-  --s1:    #0f0f0f;
-  --s2:    #161616;
-  --s3:    #1e1e1e;
-  --b1:    #1a1a1a;
-  --b2:    #262626;
-  --b3:    #333;
-  --text:  #f0f0f0;
-  --dim:   #686868;
-  --muted: #303030;
+  --bg:    #0e0e0e;
+  --s1:    #161616;
+  --s2:    #1d1d1d;
+  --s3:    #252525;
+  --b1:    #222222;
+  --b2:    #2e2e2e;
+  --b3:    #3d3d3d;
+  --text:  #f4f4f4;
+  --dim:   #888888;
+  --muted: #505050;
   --white: #ffffff;
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
@@ -63,7 +63,7 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;fon
 }
 .nav-link:hover{color:var(--text);background:var(--s2);}
 .nav-link.active{color:var(--white);}
-.nav-link.locked{opacity:.4;cursor:not-allowed;pointer-events:none;}
+.nav-link.locked{opacity:.55;cursor:not-allowed;pointer-events:none;}
 .nav-link svg{width:11px;height:11px;stroke:currentColor;fill:none;stroke-width:2.5;}
 .nav-sep{flex:1;}
 .btn{
@@ -92,7 +92,7 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;fon
 .sb-label{
   font-family:'DM Mono',monospace;
   font-size:9px;letter-spacing:0.2em;
-  text-transform:uppercase;color:var(--muted);
+  text-transform:uppercase;color:#686868;
   padding:0 20px 8px;margin-top:8px;
 }
 .sb-item{
@@ -111,7 +111,7 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;fon
   background:var(--white);
   border-radius:0 2px 2px 0;
 }
-.sb-item.locked{opacity:.35;cursor:not-allowed;}
+.sb-item.locked{opacity:.55;cursor:not-allowed;}
 .sb-item svg{
   width:14px;height:14px;stroke:currentColor;
   fill:none;stroke-width:1.8;flex-shrink:0;opacity:.6;
@@ -371,7 +371,7 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;fon
   font-family:'DM Mono',monospace;
   font-size:9px;letter-spacing:0.12em;
   text-transform:uppercase;
-  color:var(--muted);
+  color:#686868;
 }
 </style>
 </head>

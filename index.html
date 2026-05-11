@@ -376,6 +376,17 @@ text-transform:uppercase;
 color:#686868;
 }
 
+/* block Typeform from overriding site colors/fonts */
+a{color:inherit!important;text-decoration:none!important;}
+button{font-family:‘DM Sans’,sans-serif!important;color:inherit!important;}
+.btn-white{color:var(–bg)!important;background:var(–white)!important;}
+.filter-pill.on{color:var(–bg)!important;background:var(–white)!important;}
+.filter-pill{color:var(–dim)!important;}
+.nav-name{color:var(–white)!important;}
+.notify-btn{color:var(–bg)!important;background:var(–white)!important;}
+.notify-title{color:var(–white)!important;}
+.notify-sub{color:var(–dim)!important;}
+
 /* ── MOBILE ── */
 @media (max-width:768px){
 html,body{height:auto;overflow:auto;}
@@ -388,6 +399,11 @@ height:52px;padding:0 16px;gap:12px;
 }
 .nav-links{display:none;}
 .nav-sep{display:none;}
+
+/* keep logo diamond visible */
+.logo-diamond{display:block!important;}
+.nav-logo{display:flex!important;}
+.nav-name{display:block!important;}
 
 /* hide sidebar entirely */
 .sidebar{display:none;}
